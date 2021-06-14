@@ -23,7 +23,16 @@ const Footer = () => {
 
                     <Box flexGrow={2} display={'flex'} flexDirection={'column'} justifyContent={'center'}
                          alignItems={'center'}>
-                        <Box cursor={'pointer'} pos={'absolute'} top={'-30%'} bg={'#FDFF00'} borderRadius={'50%'} p={1}>
+                        <Box
+                            cursor={'pointer'}
+                            pos={'absolute'}
+                            top={'-30%'}
+                            bg={'#FDFF00'}
+                            border={`${isLargerThan400 ? '7px' : '5px'} solid`}
+                            borderColor={'dark.500'}
+                            borderRadius={'50%'}
+                            p={1}
+                        >
                             <img style={{
                                 filter: 'brightness(1)',
                                 width: '45px',
@@ -67,7 +76,6 @@ const Footer = () => {
                             />
                         }
                     />
-
 
                 </HStack>
 
