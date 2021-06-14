@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .a{fill:#dae2dc;opacity:0;}.b{fill:#fff;}.c{fill:none;stroke:#1e1e1e;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.424px;}
+        </style>
+    </defs>
+    <g transform="translate(-716.4 -2592)">
+        <rect class="a" width="60" height="60" transform="translate(716.4 2592)"/>
+        <path class="b"
+              d="M763.257,2645.383l-4.735-3.947-5.026,4.189a1.616,1.616,0,0,1-2.07,0l-5.026-4.189-5.026,4.189a1.616,1.616,0,0,1-2.07,0l-5.026-4.189-4.735,3.947a.808.808,0,0,1-1.326-.621V2604a6.019,6.019,0,0,1,6-6h24.364a6.019,6.019,0,0,1,6,6v40.761A.808.808,0,0,1,763.257,2645.383Z"/>
+        <line class="c" x2="16.598" transform="translate(738.205 2611.385)"/>
+        <line class="c" x2="16.598" transform="translate(738.205 2619.468)"/>
+        <line class="c" x2="16.598" transform="translate(738.205 2627.55)"/>
+    </g>
+</svg>
