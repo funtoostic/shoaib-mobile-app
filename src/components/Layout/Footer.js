@@ -11,7 +11,7 @@ const Footer = () => {
     const iconSize = isLargerThan400 ? 25 : 18;
 
     return (
-        <Box bg={'dark.600'} pos={'fixed'} bottom={0} left={0} width={'100%'}>
+        <Box bg={'dark.600'} pos={'fixed'} bottom={0} left={0} width={'100%'} zIndex={9999999999}>
 
             <Container h={'100%'} maxW={'container.md'}>
 
