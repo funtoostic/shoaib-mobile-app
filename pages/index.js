@@ -5,7 +5,8 @@ import {decrement, increment, selectCounterVale} from "../src/store/counter/coun
 import PointsSection from "../src/components/home/PointsSection";
 import StepperSection from "../src/components/home/StepperSection/StepperSection";
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
-import ImageWithCTAbottom from "../src/components/home/ImageWithCTAbottom";
+import ImageWithCTABtn from "../src/components/home/ImageWithCTABtn";
+import BottomCarousel from "../src/components/home/BottomCarousel/BottomCarousel";
 
 const Home = () => {
 
@@ -28,7 +29,8 @@ const Home = () => {
                 <PointsSection/>
                 <StepperSection/>
                 <BidTimeSection/>
-                <ImageWithCTAbottom/>
+                <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
+                <BottomCarousel/>
             </Container>
         </Box>
     )
