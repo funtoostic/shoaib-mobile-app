@@ -5,6 +5,7 @@ import {decrement, increment, selectCounterVale} from "../src/store/counter/coun
 import PointsSection from "../src/components/home/PointsSection";
 import StepperSection from "../src/components/home/StepperSection/StepperSection";
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
+import ImageWithCTAbottom from "../src/components/home/ImageWithCTAbottom";
 
 const Home = () => {
 
@@ -22,11 +23,12 @@ const Home = () => {
     // }
 
     return (
-        <Box bg={'dark.500'} minH={'100vh'}>
+        <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
             <Container maxW={'container.md'}>
                 <PointsSection/>
                 <StepperSection/>
                 <BidTimeSection/>
+                <ImageWithCTAbottom/>
             </Container>
         </Box>
     )

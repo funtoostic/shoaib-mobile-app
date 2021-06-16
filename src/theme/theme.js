@@ -23,10 +23,11 @@ const colors = {
 };
 
 const breakpoints = createBreakpoints({
-    sm: '25em',
-    md: '37.5em',
-    lg: '64em',
-    xl: '80em',
+    sm: '20em', // 320px
+    md: '30em', // 480px
+    lg: '48em', // 768px
+    xl: '64em', // 1024px
+    "2xl": '75em' // 1200px
 })
 
 const theme = extendTheme({
