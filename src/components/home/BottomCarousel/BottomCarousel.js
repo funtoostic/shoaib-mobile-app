@@ -9,19 +9,19 @@ const BottomCarousel = () => {
         <Box>
             <Swiper slidesPerView={'auto'} spaceBetween={5} className="mySwiper">
 
-                <SwiperSlide style={{width: '80%'}}>
+                <SwiperSlide style={{width: '90%'}}>
                     <CarouselImageWithCTABtn
                         imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}/>
                 </SwiperSlide>
 
 
-                <SwiperSlide style={{width: '80%'}}>
+                <SwiperSlide style={{width: '90%'}}>
                     <CarouselImageWithCTABtn
                         imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}/>
 
                 </SwiperSlide>
 
-                <SwiperSlide style={{width: '80%'}}>
+                <SwiperSlide style={{width: '90%'}}>
                     <CarouselImageWithCTABtn
                         imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
 
