@@ -15,9 +15,10 @@ const colors = {
         700: "#000000",
     },
     brand: {
-        500: "#FD926F",
-        600:"#87230F",
-        700: "#5D0102"
+        lightRed: "#FD926F",
+        red:"#87230F",
+        darkRed: "#5D0102",
+        yellow:'#FDFF00',
     }
 };
 

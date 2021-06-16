@@ -31,7 +31,7 @@ const Footer = () => {
                             cursor={'pointer'}
                             pos={'absolute'}
                             top={'-30%'}
-                            bg={'#FDFF00'}
+                            bg={'brand.yellow'}
                             border={`${isLargerThan400 ? '7px' : '5px'} solid`}
                             borderColor={'dark.500'}
                             borderRadius={'50%'}
