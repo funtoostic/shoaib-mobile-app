@@ -7,7 +7,6 @@ const fonts = {
     mono: "Volte-Semibold, monospace",
 }
 
-// todo - choose the brand colors
 
 const colors = {
     dark: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, HStack, Spacer, Text, useMediaQuery} from "@chakra-ui/react";
 
-const MyComponent = () => {
+const PointsSection = () => {
 
     const [isLargerThan400] = useMediaQuery("(min-width: 400px)")
 
@@ -39,4 +39,4 @@ const MyComponent = () => {
     );
 };
 
-export default MyComponent;
+export default PointsSection;

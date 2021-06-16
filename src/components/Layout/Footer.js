@@ -1,6 +1,6 @@
 import React from 'react';
-import {Box, Container, HStack, IconButton, Text} from "@chakra-ui/react";
-import {AiFillHome, AiFillStar} from "react-icons/ai";
+import {Box, Container, HStack, Text} from "@chakra-ui/react";
+import { AiFillStar} from "react-icons/ai";
 import NavButton from "./NavButton";
 import { useMediaQuery } from "@chakra-ui/react"
 
@@ -17,11 +17,15 @@ const Footer = () => {
 
                 <HStack h={'100%'} alignItems={'center'} position={'relative'} py={4}>
 
-                    <NavButton flexGrow={1} heading={'Home'} icon={<AiFillHome size={iconSize} color={'#fff'}/>}/>
+                    {/*<NavButton */}
+                    {/*    flexGrow={1}*/}
+                    {/*    heading={'Home'} */}
+                    {/*    icon={<AiFillHome size={iconSize} color={'#fff'}/>}*/}
+                    {/*/>*/}
 
                     <NavButton flexGrow={1} heading={'Rewards'} icon={<AiFillStar size={iconSize} color={'#fff'}/>}/>
 
-                    <Box flexGrow={2} display={'flex'} flexDirection={'column'} justifyContent={'center'}
+                    <Box flexGrow={1} display={'flex'} flexDirection={'column'} justifyContent={'center'}
                          alignItems={'center'}>
                         <Box
                             cursor={'pointer'}
@@ -45,21 +49,21 @@ const Footer = () => {
                         <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'} color={'#fff'}>Earn</Text>
                     </Box>
 
-                    <NavButton
-                        flexGrow={1}
-                        heading={'History'}
-                        icon={
-                            <img style={{
-                                filter: 'brightness(1)',
-                                width: `${iconSize}px`,
-                                height: `${iconSize}px`,
-                                fill: '#fff',
+                    {/*<NavButton*/}
+                    {/*    flexGrow={1}*/}
+                    {/*    heading={'History'}*/}
+                    {/*    icon={*/}
+                    {/*        <img style={{*/}
+                    {/*            filter: 'brightness(1)',*/}
+                    {/*            width: `${iconSize}px`,*/}
+                    {/*            height: `${iconSize}px`,*/}
+                    {/*            fill: '#fff',*/}
 
-                            }}
-                                 src={'/menu/bills.svg'} alt="bills"
-                            />
-                        }
-                    />
+                    {/*        }}*/}
+                    {/*             src={'/menu/bills.svg'} alt="bills"*/}
+                    {/*        />*/}
+                    {/*    }*/}
+                    {/*/>*/}
 
                     <NavButton
                         flexGrow={1}
