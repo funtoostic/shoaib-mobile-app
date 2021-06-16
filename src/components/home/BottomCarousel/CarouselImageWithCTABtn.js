@@ -5,7 +5,7 @@ import {IoArrowForwardCircleOutline} from "react-icons/io5";
 
 const CarouselImageWithCTABtn = ({imageSrc}) => {
     return (
-        <Box mx={'auto'} display={'flex'} justifyContent={'center'} w={'100%'} pos={'relative'}>
+        <Box mx={'auto'} h={['8rem','8rem','auto']} display={'flex'} justifyContent={'center'} w={'100%'} pos={'relative'}>
             <Image
                 src={imageSrc}
                 priority={'true'}
