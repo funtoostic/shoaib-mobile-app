@@ -43,7 +43,7 @@ const Footer = () => {
                                 height: '45px',
                                 fill: '#fff'
                             }}
-                                 src={'/menu/earn.svg'} alt="bills"
+                                 src={'/menu/b.svg'} alt="bills"
                             />
                         </Box>
                         <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'} color={'#fff'}>Earn</Text>
