@@ -7,7 +7,7 @@ import CarouselImageWithCTABtn from "./CarouselImageWithCTABtn";
 const BottomCarousel = () => {
     return (
         <Box>
-            <Swiper style={{marginTop: '-2rem'}} slidesPerView={'auto'} spaceBetween={5} className="mySwiper">
+            <Swiper style={{marginTop: '-2rem'}} slidesPerView={'auto'} spaceBetween={1} className="mySwiper">
 
                 <SwiperSlide style={{width: '85%'}}>
                     <CarouselImageWithCTABtn
