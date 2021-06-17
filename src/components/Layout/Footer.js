@@ -23,19 +23,24 @@ const Footer = () => {
                     {/*    heading={'Home'} */}
                     {/*    icon={<AiFillHome size={iconSize} color={'#fff'}/>}*/}
                     {/*/>*/}
-                    <Box   as={Link}
-                           href={'/reward'}
+                    <Box as={Link}
+                         href={'/reward'}
                     >
                         <NavButton
                             flexGrow={1}
-                             heading={'Rewards'}
+                            heading={'Rewards'}
                             icon={<AiFillStar size={iconSize}
                                               color={'#fff'}/>}
                         />
                     </Box>
 
-                    <Box flexGrow={1} display={'flex'} flexDirection={'column'} justifyContent={'center'}
-                         alignItems={'center'}>
+                    <Box
+                        flexGrow={1}
+                        display={'flex'}
+                        flexDirection={'column'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                    >
                         <Box
                             cursor={'pointer'}
                             pos={'absolute'}
@@ -46,14 +51,19 @@ const Footer = () => {
                             borderRadius={'50%'}
                             p={1}
                         >
-                            <img style={{
-                                filter: 'brightness(1)',
-                                width: '45px',
-                                height: '45px',
-                                fill: '#fff'
-                            }}
-                                 src={'/menu/b.svg'} alt="bills"
-                            />
+                            <Box as={Link}
+                                 href={'/earn'}
+                            >
+
+                                <img style={{
+                                    filter: 'brightness(1)',
+                                    width: '45px',
+                                    height: '45px',
+                                    fill: '#fff'
+                                }}
+                                     src={'/menu/b.svg'} alt="menu-b"
+                                />
+                            </Box>
                         </Box>
                         <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'}
                               color={'#fff'}>Earn</Text>
@@ -77,7 +87,7 @@ const Footer = () => {
 
                     <NavButton
                         flexGrow={1}
-                        heading={'Bills'}
+                        heading={'Activities'}
                         icon={
                             <img style={{
                                 filter: 'brightness(1)',
@@ -86,7 +96,7 @@ const Footer = () => {
                                 fill: '#fff',
 
                             }}
-                                 src={'/menu/history.svg'} alt="bills"
+                                 src={'/menu/history.svg'} alt="Activities"
                             />
                         }
                     />
