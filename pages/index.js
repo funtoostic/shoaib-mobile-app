@@ -26,9 +26,15 @@ const Home = () => {
     return (
         <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
             <Container maxW={'container.md'}>
+                <Box pt={'2rem'} pb={'3rem'}>
+
                 <PointsSection/>
+                </Box>
                 <StepperSection/>
+                <Box pt={'2rem'}>
+
                 <BidTimeSection/>
+                </Box>
                 <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
                 <BottomCarousel/>
             </Container>

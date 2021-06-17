@@ -6,15 +6,16 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 const ImageWithCTABtn = ({imageSrc}) => {
 
     return (
-        <Box mx={'auto'} display={'flex'} justifyContent={'center'} w={'100%'}  pos={'relative'}>
+        <Box mx={'auto'} bg={'transparent'} display={'flex'} justifyContent={'center'} w={'96%'}  pos={'relative'}>
             <Image
                 src={imageSrc}
                 priority={'true'}
-                // placeholder={'blur'}
+                placeholder={'blur'}
                 width={'568'}
                 height={'824'}
                 layout={'intrinsic'}
                 objectFit={'contain'}
+
             />
             <Box pos={'absolute'} left={'50%'} transform={'translateX(-50%)'} h={'100%'} >
                 <Box height={['82%']}/>

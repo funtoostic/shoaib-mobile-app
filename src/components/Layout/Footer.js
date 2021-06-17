@@ -1,8 +1,9 @@
 import React from 'react';
 import {Box, Container, HStack, Text} from "@chakra-ui/react";
-import { AiFillStar} from "react-icons/ai";
+import {AiFillStar} from "react-icons/ai";
 import NavButton from "./NavButton";
-import { useMediaQuery } from "@chakra-ui/react"
+import {useMediaQuery} from "@chakra-ui/react"
+import Link from 'next/link'
 
 const Footer = () => {
 
@@ -22,8 +23,16 @@ const Footer = () => {
                     {/*    heading={'Home'} */}
                     {/*    icon={<AiFillHome size={iconSize} color={'#fff'}/>}*/}
                     {/*/>*/}
-
-                    <NavButton flexGrow={1} heading={'Rewards'} icon={<AiFillStar size={iconSize} color={'#fff'}/>}/>
+                    <Box   as={Link}
+                           href={'/reward'}
+                    >
+                        <NavButton
+                            flexGrow={1}
+                             heading={'Rewards'}
+                            icon={<AiFillStar size={iconSize}
+                                              color={'#fff'}/>}
+                        />
+                    </Box>
 
                     <Box flexGrow={1} display={'flex'} flexDirection={'column'} justifyContent={'center'}
                          alignItems={'center'}>
@@ -46,7 +55,8 @@ const Footer = () => {
                                  src={'/menu/b.svg'} alt="bills"
                             />
                         </Box>
-                        <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'} color={'#fff'}>Earn</Text>
+                        <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'}
+                              color={'#fff'}>Earn</Text>
                     </Box>
 
                     {/*<NavButton*/}
