@@ -7,6 +7,7 @@ import StepperSection from "../src/components/home/StepperSection/StepperSection
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
 import ImageWithCTABtn from "../src/components/home/ImageWithCTABtn";
 import BottomCarousel from "../src/components/home/BottomCarousel/BottomCarousel";
+import HeroCarousel from "../src/components/home/HeroCarousel/HeroCarousel";
 
 const Home = () => {
 
@@ -25,18 +26,33 @@ const Home = () => {
 
     return (
         <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
+
             <Container maxW={'container.md'}>
+                {/* Points section*/}
                 <Box pt={'2rem'} pb={'3rem'}>
-
-                <PointsSection/>
+                    <PointsSection/>
                 </Box>
-                <StepperSection/>
+
+                {/*Stepper Section*/}
+                <Box>
+                    <StepperSection/>
+                </Box>
+
+                {/* Bid time section*/}
                 <Box pt={'2rem'}>
-
-                <BidTimeSection/>
+                    <BidTimeSection/>
                 </Box>
-                <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
-                <BottomCarousel/>
+
+                {/*Hero carousel*/}
+                <Box>
+                    <HeroCarousel/>
+                </Box>
+
+                {/*Bottom Carousel*/}
+                <Box>
+                    <BottomCarousel/>
+                </Box>
+
             </Container>
         </Box>
     )

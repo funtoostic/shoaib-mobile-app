@@ -38,13 +38,13 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label="Day 1"
+                    }} label="+5"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
                     }}
                 >
-                   +5
+                   1
                 </Step>
 
                 <Step
@@ -58,7 +58,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+5"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
@@ -78,7 +78,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+10"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
@@ -98,7 +98,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+10"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
@@ -118,7 +118,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+15"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
@@ -138,7 +138,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+15"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
@@ -158,7 +158,7 @@ const StepperSection = () => {
                         activeTextColor: '#FDFF00',
                         completedTextColor: '#FDFF00',
 
-                    }} label=""
+                    }} label="+50"
                     style={{
                         border: '1px solid #FDFF00',
                         lineHeight: 1,
