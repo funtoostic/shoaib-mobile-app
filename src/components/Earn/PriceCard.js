@@ -1,6 +1,7 @@
 import React from 'react';
 import {Box, Button, HStack, Spacer, Text} from "@chakra-ui/react";
 import { CgAdd } from "react-icons/cg";
+import { FcMoneyTransfer } from "react-icons/fc";
 
 
 const PriceCard = ({title,desc,price}) => {
@@ -13,12 +14,20 @@ const PriceCard = ({title,desc,price}) => {
         >
             {/* left box*/}
             <Box>
-                <Text>
-                    {title}
-                </Text>
-                <Text>
-                    {desc}
-                </Text>
+                <HStack alignItems={'center'}>
+                    <Box>
+                        <FcMoneyTransfer size={40}/>
+                    </Box>
+                    <Box>
+                        <Text>
+                            {title}
+                        </Text>
+                        <Text>
+                            {desc}
+                        </Text>
+                    </Box>
+                </HStack>
+
             </Box>
 
             <Spacer/>
