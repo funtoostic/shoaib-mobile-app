@@ -60,7 +60,8 @@ const Earn = () => {
 
                         <Button borderRadius={'20px'}  justifyContent={'space-around'}
                                  variant={'solid'}
-                                leftIcon={<IoArrowForwardCircleOutline size={20} color={'dark.700'}/>}>
+                                leftIcon={<IoArrowForwardCircleOutline size={20} color={'dark.700'}/>}
+                        >
                             Refer
                         </Button>
 
