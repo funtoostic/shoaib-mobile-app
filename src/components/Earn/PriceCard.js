@@ -27,6 +27,13 @@ const PriceCard = ({title, desc, price}) => {
         setPage(page)
     }
 
+    const priceBtnClicckHandler = (price) => {
+        setPage('first');
+        setSelecctdBills([]);
+        onOpen();
+        console.log(price)
+    }
+
     const selectedBillsToggler = (bill) => {
 
         let newBills = [...selectedBills];
@@ -72,7 +79,7 @@ const PriceCard = ({title, desc, price}) => {
 
             {/* right box*/}
             <Box>
-                <Button onClick={onOpen} leftIcon={<CgAdd size={'15'}/>} variant={'solid'} borderRadius={'20px'}>
+                <Button onClick={priceBtnClicckHandler.bind(this,price)} leftIcon={<CgAdd size={'15'}/>} variant={'solid'} borderRadius={'20px'}>
                     {price}
                 </Button>
             </Box>
