@@ -9,7 +9,7 @@ const BidTimeSection = () => {
     const date = new Date;
 
     return (
-        <HStack color={'white'} fontWeight={'bold'} fontSize={['10px','12px']} >
+        <HStack color={'white'} fontWeight={'bold'} fontSize={['10px',null,'12px']} >
             <Text >
                 Place your bid beforee
             </Text>
