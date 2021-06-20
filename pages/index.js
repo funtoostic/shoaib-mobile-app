@@ -3,7 +3,7 @@ import {DarkModeSwitch} from "../src/components/Buttons/DarkModeSwitch";
 import {useDispatch, useSelector} from "react-redux";
 import {decrement, increment, selectCounterVale} from "../src/store/counter/counterSlice";
 import PointsSection from "../src/components/home/PointsSection";
-import StepperSection from "../src/components/home/StepperSection/StepperSection";
+import StepperSection from "../src/components/home/StepperSection";
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
 import ImageWithCTABtn from "../src/components/home/ImageWithCTABtn";
 import BottomCarousel from "../src/components/home/BottomCarousel/BottomCarousel";
