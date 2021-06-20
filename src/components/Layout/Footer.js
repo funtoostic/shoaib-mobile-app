@@ -84,22 +84,25 @@ const Footer = () => {
                     {/*        />*/}
                     {/*    }*/}
                     {/*/>*/}
+                    <Box as={Link}
+                         href={'/activity'}
+                    >
+                        <NavButton
+                            flexGrow={1}
+                            heading={'Activities'}
+                            icon={
+                                <img style={{
+                                    filter: 'brightness(1)',
+                                    width: `${iconSize}px`,
+                                    height: `${iconSize}px`,
+                                    fill: '#fff',
 
-                    <NavButton
-                        flexGrow={1}
-                        heading={'Activities'}
-                        icon={
-                            <img style={{
-                                filter: 'brightness(1)',
-                                width: `${iconSize}px`,
-                                height: `${iconSize}px`,
-                                fill: '#fff',
-
-                            }}
-                                 src={'/menu/history.svg'} alt="Activities"
-                            />
-                        }
-                    />
+                                }}
+                                     src={'/menu/history.svg'} alt="Activities"
+                                />
+                            }
+                        />
+                    </Box>
 
                 </HStack>
 

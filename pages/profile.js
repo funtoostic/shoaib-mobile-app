@@ -4,6 +4,4 @@ const ProfilePage = () => {
   return <Profile />;
 };
 
-export { getServerSideProps } from "../src/theme/Chakra";
-
 export default ProfilePage;

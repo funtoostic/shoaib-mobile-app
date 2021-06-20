@@ -5,6 +5,7 @@ import Image from "next/image";
 const ActivityCard = ({imgSrc,heading,desc,price}) => {
     return (
         <HStack
+            cursor={'pointer'}
             w={'100%'}
             bg={'#fff'}
             p={4}

@@ -4,15 +4,17 @@ import PointsSection from "../src/components/home/PointsSection";
 import Image from "next/image";
 import {IoArrowForwardCircleOutline} from "react-icons/io5";
 import PriceCard from "../src/components/Earn/PriceCard";
+import {client} from "../src/utils/utils";
 
-const Earn = () => {
+const Earn = ({pointsData}) => {
+
     return (
         <Box bg={'dark.500'} minH={'100vh'} pb={'7rem'}>
             <Container maxW={'container.md'}>
 
                 {/* Top points section*/}
                 <Box pt={4} pb={6}>
-                    <PointsSection/>
+                    <PointsSection pointsData={pointsData}/>
                 </Box>
 
                 {/*    Banner image*/}
@@ -72,5 +74,30 @@ const Earn = () => {
         </Box>
     );
 };
+
+export async function getServerSideProps(context) {
+
+    //here we are using axios
+    const resPoints = await client.get('/v1/point')
+
+
+    const pointsData = await resPoints.data;
+
+
+    if (!pointsData ) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            pointsData,
+        },
+    }
+}
 
 export default Earn;

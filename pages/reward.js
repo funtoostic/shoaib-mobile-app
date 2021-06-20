@@ -2,18 +2,24 @@ import React from 'react';
 import {Box, Container} from "@chakra-ui/react";
 import PointsSection from "../src/components/home/PointsSection";
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
-import CarouselImageWithCTABtn from "../src/components/home/BottomCarousel/CarouselImageWithCTABtn";
 import HeroCarousel from "../src/components/home/HeroCarousel/HeroCarousel";
-import {Swiper, SwiperSlide} from "swiper/react";
+import {client} from "../src/utils/utils";
+import RewardTopCarousel from "../src/components/reward/RewardTopCarousel";
 
-const RewardPage = () => {
+const RewardPage = ({pointsData,rewardsData}) => {
+
+    const heroRewards = rewardsData.filter(reward => reward.type === 'HERO');
+    const sleepingBannerRewards = rewardsData.filter(reward => reward.type === 'SLEEPING_BANNER')
+
+    console.log(heroRewards)
+
     return (
         <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
             <Container maxW={'container.md'}>
 
                 {/* Top points section*/}
                 <Box pt={4} pb={6}>
-                    <PointsSection/>
+                    <PointsSection pointsData={pointsData}/>
                 </Box>
 
                 {/*/ Bid time section*/}
@@ -21,72 +27,52 @@ const RewardPage = () => {
                     <BidTimeSection/>
                 </Box>
 
-                {/* First image carousel*/}
-                <Swiper style={{marginTop: '-2rem'}} slidesPerView={'auto'} spaceBetween={5} className="mySwiper">
+                {
+                    sleepingBannerRewards.map((reward,i) => (
+                        <RewardTopCarousel key={i} index={i} reward={reward}/>
+                    ))
+                }
 
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-                    </SwiperSlide>
-
-
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-                    </SwiperSlide>
-
-                </Swiper>
-
-
-                {/* Second image carouel*/}
-                <Swiper style={{marginTop: '-4.5rem'}} slidesPerView={'auto'} spaceBetween={5} className="mySwiper">
-
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-
-                    </SwiperSlide>
-
-
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <CarouselImageWithCTABtn
-                            imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-                        />
-
-                    </SwiperSlide>
-
-                </Swiper>
-
-
-                {/* Hero image carousel*/}
                 <Box mt={'-3.5rem'}>
-                    <HeroCarousel/>
+                    {
+                        heroRewards.map((reward,i) => (
+                                <HeroCarousel key={i} reward={reward}/>
+                        ))
+                    }
+
                 </Box>
 
             </Container>
         </Box>
     );
 };
+
+export async function getServerSideProps() {
+
+    //here we are using axios
+    const resPoints = await client.get('/v1/point')
+
+    const resRewards = await client.get('/v1/rewards')
+
+    const pointsData = await resPoints.data;
+
+    const rewardsData = await resRewards.data.campaign.layout;
+
+    if (!pointsData || !rewardsData) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            pointsData,
+            rewardsData
+        }, // will be passed to the page component as props
+    }
+}
 
 export default RewardPage;
