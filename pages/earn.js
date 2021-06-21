@@ -1,10 +1,11 @@
 import React from 'react';
-import {Box, Button, Container, VStack} from "@chakra-ui/react";
+import {Box, Container, VStack} from "@chakra-ui/react";
 import PointsSection from "../src/components/home/PointsSection";
 import Image from "next/image";
 import {IoArrowForwardCircleOutline} from "react-icons/io5";
 import PriceCard from "../src/components/Earn/PriceCard";
 import {client} from "../src/utils/utils";
+import WhiteButton from "../src/components/Buttons/WhiteButton";
 
 const Earn = ({pointsData}) => {
 
@@ -60,12 +61,12 @@ const Earn = ({pointsData}) => {
                     <Box pos={'absolute'} right={'8%'} h={'100%'}>
                         <Box height={['80%']}/>
 
-                        <Button borderRadius={'20px'}  justifyContent={'space-around'}
+                        <WhiteButton borderRadius={'20px'}  justifyContent={'space-around'}
                                  variant={'solid'}
                                 leftIcon={<IoArrowForwardCircleOutline size={20} color={'dark.700'}/>}
                         >
                             Refer
-                        </Button>
+                        </WhiteButton>
 
                     </Box>
                 </Box>

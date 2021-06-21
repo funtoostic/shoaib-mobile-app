@@ -14,6 +14,7 @@ import {IoArrowBackCircleOutline, IoArrowForwardCircleOutline} from "react-icons
 import {ListItem, UnorderedList} from "@chakra-ui/react"
 import {AiFillCamera} from "react-icons/ai";
 import {RiBillLine} from "react-icons/ri";
+import WhiteButton from "../Buttons/WhiteButton";
 
 
 const PriceCard = ({title, desc, price}) => {
@@ -79,9 +80,9 @@ const PriceCard = ({title, desc, price}) => {
 
             {/* right box*/}
             <Box>
-                <Button onClick={priceBtnClicckHandler.bind(this,price)} leftIcon={<CgAdd size={'15'}/>} variant={'solid'} borderRadius={'20px'}>
+                <WhiteButton onClick={priceBtnClicckHandler.bind(this,price)} leftIcon={<CgAdd size={'15'}/>} variant={'solid'} borderRadius={'20px'}>
                     {price}
-                </Button>
+                </WhiteButton>
             </Box>
 
             {/*    Here  is the drawer compponent*/}
@@ -90,7 +91,7 @@ const PriceCard = ({title, desc, price}) => {
                     <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
                         <DrawerOverlay/>
                         <DrawerContent h={'30rem'} borderRadius={'15px 15px 0 0'}>
-                            <DrawerBody>
+                            <DrawerBody bg={'#fff'}>
                                 <Text my={8}>Which of these bills you are uploading?</Text>
 
                                 <Flex
@@ -192,7 +193,7 @@ const PriceCard = ({title, desc, price}) => {
 
                             </DrawerBody>
 
-                            <DrawerFooter>
+                            <DrawerFooter bg={'#fff'}>
                                 <Box display={'flex'} justifyContent={'flex-end'} mt={0} mb={2}>
                                     <Button
                                         onClick={pageHandler.bind(this, 'second')}
@@ -217,7 +218,7 @@ const PriceCard = ({title, desc, price}) => {
                     <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
                         <DrawerOverlay/>
                         <DrawerContent h={'30rem'} borderRadius={'15px 15px 0 0'}>
-                            <DrawerBody>
+                            <DrawerBody bg={'#fff'}>
                                 <Text my={4}>
                                     Electricity bill upload intructions
                                 </Text>
@@ -231,7 +232,7 @@ const PriceCard = ({title, desc, price}) => {
 
                             </DrawerBody>
 
-                            <DrawerFooter px={2} w={'100%'}>
+                            <DrawerFooter bg={'#fff'} px={2} w={'100%'}>
 
                                 <Flex direction={'row'} w={'100%'}>
 

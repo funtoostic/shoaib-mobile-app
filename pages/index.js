@@ -72,7 +72,7 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}) {
     // here we are using fetch api
 
     // const res = await fetch('https://api.dev.billup.app/v1/point',{
@@ -108,7 +108,8 @@ export async function getServerSideProps() {
         props: {
             pointsData,
             checkinData,
-            rewardsData
+            rewardsData,
+            cookies: req.headers.cookie ?? "",
         }, // will be passed to the page component as props
     }
 }
