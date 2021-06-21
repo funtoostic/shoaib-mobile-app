@@ -8,7 +8,7 @@ import {IoArrowForwardCircleOutline} from "react-icons/io5";
 import {client} from "../../src/utils/utils";
 import parse from "html-react-parser";
 
-const ProductDetails = ({productData}) => {
+const ProductDetails = ({productData,pointsData}) => {
 
     const [isLargerThan480] = useMediaQuery("(min-width: 480px)")
 
@@ -145,7 +145,7 @@ const ProductDetails = ({productData}) => {
                                 </Text>
                                 <Text letterSpacing={'2px'} color={'white'} fontWeight={'bold'}
                                       fontSize={['12px']}>
-                                    50,257
+                                    {pointsData.balance}
                                 </Text>
                             </Box>
 
@@ -173,7 +173,9 @@ export async function getServerSideProps({query: {id}}) {
 
     //here we are using axios
     const resProduct = await client.get(`/v1/reward/${id}`)
+    const resPoints = await client.get('/v1/point')
 
+    const pointsData = await resPoints.data;
     const productData = await resProduct.data;
 
     if (!productData ) {
@@ -188,6 +190,7 @@ export async function getServerSideProps({query: {id}}) {
     return {
         props: {
             productData,
+            pointsData
         },
     }
 }
