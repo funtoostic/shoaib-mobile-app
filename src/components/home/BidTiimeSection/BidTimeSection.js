@@ -4,20 +4,25 @@ import {HStack, Spacer, Text} from "@chakra-ui/react";
 import TimeRenderer from "./TimeRenderer";
 
 
-const BidTimeSection = () => {
+const BidTimeSection = ({endingTime}) => {
 
     const date = new Date;
 
+    const lastTime = new Date(endingTime);
+
+    const remainingTime = lastTime.getTime() - date.getTime();
+
+
     return (
-        <HStack color={'white'} fontWeight={'bold'} fontSize={['10px',null,'12px']} >
-            <Text >
+        <HStack color={'white'} fontWeight={'bold'} fontSize={['10px', null, '12px']}>
+            <Text>
                 Place your bid beforee
             </Text>
             <Spacer/>
             <Countdown intervalDelay={0}
                        precision={3}
                        renderer={TimeRenderer}
-                       date={ date.getTime() + 9810000}
+                       date={remainingTime}
             />,
         </HStack>
     );

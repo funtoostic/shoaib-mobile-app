@@ -5,7 +5,7 @@ const Renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
         // Render a completed state
         return (<Box>
-            Completed
+            00 : 00 : 00 : 00
         </Box>);
     } else {
         // Render a countdown

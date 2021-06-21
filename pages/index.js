@@ -24,8 +24,10 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
     //     dispatch(decrement());
     // }
 
-    const heroRewards = rewardsData.filter(reward => reward.type === 'HERO');
-    const sleepingBannerRewards = rewardsData.filter(reward => reward.type === 'SLEEPING_BANNER')
+    const heroRewards = rewardsData.layout.filter(reward => reward.type === 'HERO');
+    const sleepingBannerRewards = rewardsData.layout.filter(reward => reward.type === 'SLEEPING_BANNER')
+
+    const endingTime = rewardsData.validTill;
 
 
     return (
@@ -44,7 +46,7 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
 
                 {/* Bid time section*/}
                 <Box pt={'2rem'}>
-                    <BidTimeSection/>
+                    <BidTimeSection endingTime={endingTime}/>
                 </Box>
 
                 {/*Hero carousel*/}
@@ -93,7 +95,7 @@ export async function getServerSideProps({req}) {
 
     const checkinData = await resCheckin.data.data;
 
-    const rewardsData = await resRewards.data.campaign.layout;
+    const rewardsData = await resRewards.data.campaign;
 
     if (!pointsData || !checkinData || !rewardsData) {
         return {

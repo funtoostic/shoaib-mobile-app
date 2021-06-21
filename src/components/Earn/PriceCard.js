@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Box, Button, Flex, HStack, Spacer, Text, useDisclosure} from "@chakra-ui/react";
-import {CgAdd} from "react-icons/cg";
 import {FcMoneyTransfer} from "react-icons/fc";
 import {
     Drawer,
@@ -17,7 +16,7 @@ import {RiBillLine} from "react-icons/ri";
 import WhiteButton from "../Buttons/WhiteButton";
 
 
-const PriceCard = ({title, desc, price}) => {
+const PriceCard = ({title, desc, price,limit,uploads}) => {
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const [selectedBills, setSelecctdBills] = useState([]);
@@ -28,11 +27,12 @@ const PriceCard = ({title, desc, price}) => {
         setPage(page)
     }
 
-    const priceBtnClicckHandler = (price) => {
+    const btnClickHandler = () => {
+
         setPage('first');
         setSelecctdBills([]);
         onOpen();
-        console.log(price)
+
     }
 
     const selectedBillsToggler = (bill) => {
@@ -48,7 +48,6 @@ const PriceCard = ({title, desc, price}) => {
         }
 
     }
-    console.log(selectedBills)
 
 
     return (
@@ -65,10 +64,10 @@ const PriceCard = ({title, desc, price}) => {
                         <FcMoneyTransfer size={40}/>
                     </Box>
                     <Box>
-                        <Text>
+                        <Text fontWeight={'bold'} fontSize={'14px'}>
                             {title}
                         </Text>
-                        <Text>
+                        <Text fontSize={'12px'}>
                             {desc}
                         </Text>
                     </Box>
@@ -80,8 +79,12 @@ const PriceCard = ({title, desc, price}) => {
 
             {/* right box*/}
             <Box>
-                <WhiteButton onClick={priceBtnClicckHandler.bind(this,price)} leftIcon={<CgAdd size={'15'}/>} variant={'solid'} borderRadius={'20px'}>
-                    {price}
+                <WhiteButton
+                    fontSize={'12px'}
+                             onClick={btnClickHandler}
+                    variant={'solid'} borderRadius={'20px'}
+                >
+                    {uploads} / {limit}
                 </WhiteButton>
             </Box>
 
