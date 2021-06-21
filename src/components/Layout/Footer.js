@@ -107,8 +107,12 @@ const Footer = () => {
                                 />
 
                         </Button>
-                        <Text fontSize={isLargerThan400 ? '1rem' : '13px'} mt={isLargerThan400 ? '1.8rem' : '1.5rem'}
-                              color={'#fff'}>Earn</Text>
+                        <Text
+                            fontSize={isLargerThan400 ? '1rem' : '13px'}
+                            mt={isLargerThan400 ? '33px' : '35px'}
+                              color={'#fff'}>
+                            Earn
+                        </Text>
                     </Box>
 
 
