@@ -1,5 +1,5 @@
-import React from 'react';
-import {Box, Button, Container, Heading, HStack, Spacer, Text, useMediaQuery} from "@chakra-ui/react";
+import React, {useState} from 'react';
+import {Box, Container, Heading, HStack, Spacer, Text, useMediaQuery, useToast} from "@chakra-ui/react";
 import BidTimeSection from "../../src/components/home/BidTiimeSection/BidTimeSection";
 import {IoIosArrowDropleftCircle} from "react-icons/io";
 import Link from 'next/link'
@@ -7,10 +7,67 @@ import Image from "next/image";
 import {IoArrowForwardCircleOutline} from "react-icons/io5";
 import {client} from "../../src/utils/utils";
 import parse from "html-react-parser";
+import WhiteButton from "../../src/components/Buttons/WhiteButton";
 
-const ProductDetails = ({productData,pointsData}) => {
+const ProductDetails = ({productData,pointsData,id}) => {
 
     const [isLargerThan480] = useMediaQuery("(min-width: 480px)")
+
+    const toast = useToast();
+
+    const [isLoading,setIsLoading] = useState(false);
+
+    const placeBidHandler = () => {
+
+        // if the user has less balance then it will return
+        if (pointsData.balance < productData.minimumBid) {
+
+            toast({
+                title: "Error",
+                description: "Insufficient Funds",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            })
+
+            return;
+        }
+
+        // if the user has balance then the logic goes here
+        setIsLoading(true);
+
+        client.post(`/v1/reward/${id}/bid`,{
+
+            bidValue: productData.minimumBid,
+
+        })
+            .then(() => {
+
+                setIsLoading(false);
+
+                toast({
+                    title: "Success",
+                    description: "Bid Successful",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                })
+
+            })
+            .catch((err)=> {
+
+                setIsLoading(false);
+
+                toast({
+                    title: "Error",
+                    description: err.message,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+
+            })
+    }
 
     console.log(productData)
 
@@ -153,9 +210,15 @@ const ProductDetails = ({productData,pointsData}) => {
 
                         <Spacer/>
                         <Box>
-                            <Button fontSize={'12px'} size={'sm'} rightIcon={<IoArrowForwardCircleOutline/>}>
+                            <WhiteButton
+                                isLoading={isLoading}
+                                onClick={placeBidHandler}
+                                fontSize={'12px'}
+                                size={'sm'}
+                                rightIcon={<IoArrowForwardCircleOutline/>}
+                            >
                                 Place Bid
-                            </Button>
+                            </WhiteButton>
                         </Box>
 
                     </HStack>
@@ -190,7 +253,8 @@ export async function getServerSideProps({query: {id}}) {
     return {
         props: {
             productData,
-            pointsData
+            pointsData,
+            id
         },
     }
 }

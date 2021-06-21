@@ -1,11 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Box} from "@chakra-ui/react";
 import Image from "next/image";
 import {IoArrowForwardCircleOutline} from "react-icons/io5";
-import Link from 'next/link'
+
 import WhiteButton from "../../Buttons/WhiteButton";
+import {useRouter} from "next/router";
 
 const CarouselImageWithCTABtn = ({imageSrc, id}) => {
+
+    const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState();
+
+    const buttonClickHandler = () => {
+
+        setIsLoading(true);
+
+        router.push(`product/${id}`)
+
+
+    }
+
     return (
         <Box mx={'auto'} h={['auto']} display={'flex'} justifyContent={'center'} w={'100%'} pos={'relative'}>
             <Image
@@ -20,8 +35,10 @@ const CarouselImageWithCTABtn = ({imageSrc, id}) => {
             <Box pos={'absolute'} right={'8%'} h={'100%'}>
                 <Box height={['60%']}/>
 
-                <Link href={`/product/${id}`}>
+                {/*<Link href={`/product/${id}`}>*/}
                     <WhiteButton
+                        isLoading={isLoading}
+                        onClick={buttonClickHandler}
                         fontWeight={'light'}
                         justifyContent={'space-around'}
                         p={['6px']}
@@ -34,7 +51,7 @@ const CarouselImageWithCTABtn = ({imageSrc, id}) => {
                     >
                         Place Bid
                     </WhiteButton>
-                </Link>
+                {/*</Link>*/}
 
             </Box>
         </Box>
