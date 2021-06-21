@@ -3,8 +3,10 @@ import Layout from '../src/components/Layout/Layout';
 import 'focus-visible/dist/focus-visible'
 import {Provider} from 'react-redux'
 import store from "../src/store/store";
-import '../styles/global.css';
 import "swiper/swiper.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import '../styles/global.css';
+
 
 function MyApp({Component, pageProps}) {
 

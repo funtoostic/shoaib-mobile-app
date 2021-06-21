@@ -24,7 +24,7 @@ const Footer = () => {
                     {/*    icon={<AiFillHome size={iconSize} color={'#fff'}/>}*/}
                     {/*/>*/}
                     <Box as={Link}
-                         href={'/reward'}
+                         href={'/rewards'}
                     >
                         <NavButton
                             flexGrow={1}
