@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Container, HStack, Spacer, VStack} from "@chakra-ui/react";
+import {Box, Container, HStack, Spacer, Text, VStack} from "@chakra-ui/react";
 import ActivityCard from "../src/components/Activity/ActivityCard";
 import {client} from "../src/utils/utils";
 
@@ -33,37 +33,35 @@ const Activity = ({billUploadHistory,bids}) => {
                 </HStack>
 
                 <VStack w={'100%'} mt={8}>
+                {
+                    bids.map(bid => (
+                        <ActivityCard
+                            bidValue={`+ ${bid.bidValue}`}
+                            // price={`+ ${bid.bidValue}`}
+                            imgSrc={bid.image}
+                            bidTitle={bid.title}
+                            // createdAt={billUpload.createdAt}
+                            // status={0}
+                        />
+                    ))
+                }
+
+
+                </VStack>
+
+                <Text mb={'-1rem'} mt={'2rem'} fontWeight={'bold'} fontSize={'16px'} color={'#fff'}>
+                    Bill History
+                </Text>
+
+                <VStack w={'100%'} mt={8} mb={8}>
                     <ActivityCard
-                        price={'+20'}
+                        price={`+ ${billUpload.points}`}
                         imgSrc={billUpload.thumbnailUrl}
                         merchant={merchantName}
                         createdAt={billUpload.createdAt}
                         status={0}
                     />
 
-                    <ActivityCard
-                        price={'+20'}
-                        imgSrc={'https://billupassets.blob.core.windows.net/rewards/sample/hero.png'}
-                        merchant={'Heading'}
-                        createdAt={'Description'}
-                        status={3}
-                    />
-
-                    <ActivityCard
-                        price={'+20'}
-                        imgSrc={'https://billupassets.blob.core.windows.net/rewards/sample/hero.png'}
-                        merchant={'Heading'}
-                        createdAt={'Description'}
-                        status={2}
-                    />
-
-                    <ActivityCard
-                        price={'+20'}
-                        imgSrc={'https://billupassets.blob.core.windows.net/rewards/sample/hero.png'}
-                        merchant={'Heading'}
-                        createdAt={'Description'}
-                        status={1}
-                    />
 
                 </VStack>
 
