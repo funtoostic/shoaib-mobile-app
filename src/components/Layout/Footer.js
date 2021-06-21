@@ -64,6 +64,8 @@ const Footer = () => {
                             flexGrow={1}
                             heading={'Rewards'}
                             icon={<AiFillStar size={iconSize}
+                                              width={iconSize}
+                                              height={iconSize}
                                               color={'#fff'}/>}
                         />
 
