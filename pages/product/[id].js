@@ -129,9 +129,9 @@ const ProductDetails = ({ productData, pointsData, id }) => {
               {/*<HStack>*/}
               {/*left box*/}
               <Box>
-                <Heading fontSize={"20px"} as={"h3"}>
+                <Text fontSize={"20px"} as={"h3"}>
                   {productData.details.title}
-                </Heading>
+                </Text>
                 <Text fontSize={"1rem"}>{productData.details.subTitle}</Text>
               </Box>
 
@@ -150,11 +150,13 @@ const ProductDetails = ({ productData, pointsData, id }) => {
               {/*</HStack>*/}
 
               {/*    Desc Text*/}
-              <Box my={4}>{parse(productData.details.description)}</Box>
+              <Box my={4} px={3}>
+                {parse(productData.details.description)}
+              </Box>
 
-              <Heading fontSize={"20px"} as={"h3"}>
+              <Text fontSize={"20px"} as={"h3"}>
                 Rules to participate
-              </Heading>
+              </Text>
 
               <Box mt={4}>{parse(productData.details.rules)}</Box>
             </Box>

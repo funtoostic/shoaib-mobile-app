@@ -36,7 +36,7 @@ const CarouselImageWithCTABtn = ({ imageSrc, id }) => {
         objectFit={"contain"}
       />
       <Box pos={"absolute"} right={"8%"} h={"100%"}>
-        <Box height={["60%"]} />
+        <Box height={["63%"]} />
 
         {/*<Link href={`/product/${id}`}>*/}
         <WhiteButton
@@ -46,7 +46,7 @@ const CarouselImageWithCTABtn = ({ imageSrc, id }) => {
           justifyContent={"space-around"}
           p={["6px"]}
           size={["xs"]}
-          fontSize={["8px"]}
+          fontSize={["10px"]}
           variant={"solid"}
           rightIcon={
             <IoArrowForwardCircleOutline size={15} color={"dark.700"} />

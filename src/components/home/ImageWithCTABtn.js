@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import WhiteButton from "../Buttons/WhiteButton";
@@ -34,11 +34,13 @@ const ImageWithCTABtn = ({ imageSrc, id, title }) => {
         layout={"intrinsic"}
         objectFit={"contain"}
       />
-      <Box
+      <Flex
         pos={"absolute"}
-        left={"50%"}
-        transform={"translateX(-50%)"}
-        h={"100%"}
+        left={0}
+        right={0}
+        bottom={14}
+        px={4}
+        justifyContent={"space-evenly"}
       >
         <Flex alignItems="center" /* bg="blackAlpha.100"  */ px={3}>
           <Text fontSize={"1.15rem"} color="white" lineHeight={".75rem"}>
@@ -52,10 +54,11 @@ const ImageWithCTABtn = ({ imageSrc, id, title }) => {
           onClick={buttonClickHandler}
           fontWeight={"light"}
           justifyContent={"space-around"}
-          p={["6px", "10px"]}
-          w={["7rem", "9rem"]}
+          py={"4px"}
+          px={"10px"}
+          lineHeight={1}
           size={["sm", "md"]}
-          fontSize={[".8rem", "1rem"]}
+          fontSize={[".7rem", ".75rem"]}
           variant={"solid"}
           rightIcon={
             <IoArrowForwardCircleOutline size={20} color={"dark.700"} />
@@ -64,7 +67,7 @@ const ImageWithCTABtn = ({ imageSrc, id, title }) => {
           Place Bid
         </WhiteButton>
         {/*</Link>*/}
-      </Box>
+      </Flex>
     </Box>
   );
 };
