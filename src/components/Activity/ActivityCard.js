@@ -2,7 +2,39 @@ import React from 'react';
 import {Box, HStack, Spacer, Text} from "@chakra-ui/react";
 import Image from "next/image";
 
-const ActivityCard = ({imgSrc,heading,desc,price}) => {
+const ActivityCard = ({imgSrc,merchant,createdAt,price,status}) => {
+
+    let statusText;
+    let statusColor;
+
+    switch (status) {
+        case 0: {
+            statusText = 'Pending';
+            statusColor='#808080'
+            break;
+        }
+
+        case 1: {
+            statusText = 'Processing';
+            statusColor='#EAA363'
+            break;
+        }
+
+        case 2: {
+            statusText = 'Approved'
+            statusColor='#39B54A'
+            break;
+        }
+
+        case 3: {
+            statusText = 'Rejected'
+            statusColor='#ED7474'
+            break;
+        }
+    }
+
+    console.log(status)
+
     return (
         <HStack
             cursor={'pointer'}
@@ -32,11 +64,11 @@ const ActivityCard = ({imgSrc,heading,desc,price}) => {
                     <Box>
                         <Box mb={'5px'}>
                             <Text fontWeight={'bold'} fontSize={'14px'}>
-                                {heading}
+                                {merchant}
                             </Text>
                         </Box>
                         <Box fontSize={'12px'}>
-                            {desc}
+                            {createdAt}
                         </Box>
                     </Box>
 
@@ -50,13 +82,20 @@ const ActivityCard = ({imgSrc,heading,desc,price}) => {
             <Box>
 
                 <Box
-                    bg={'dark.600'}
+                    fontSize={'12px'}
+                    bg={statusColor}
                     color={'#fff'}
                     borderRadius={'lg'}
-                    p={2}
+                    p={1}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
                 >
                     {price}
                 </Box>
+                <Text color={statusColor} mt={1} fontSize={'12px'}>
+                    {statusText}
+                </Text>
 
             </Box>
 
