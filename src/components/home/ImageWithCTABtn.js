@@ -1,8 +1,9 @@
 import React from 'react';
-import {Box, Button} from "@chakra-ui/react";
+import {Box} from "@chakra-ui/react";
 import Image from 'next/image'
 import {IoArrowForwardCircleOutline} from "react-icons/io5";
 import Link from 'next/link'
+import WhiteButton from "../Buttons/WhiteButton";
 
 const ImageWithCTABtn = ({imageSrc, id}) => {
 
@@ -22,19 +23,20 @@ const ImageWithCTABtn = ({imageSrc, id}) => {
                 <Box height={['82%']}/>
 
                 <Link href={`product/${id}`}>
-                    <Button fontWeight={'light'}
+                    <WhiteButton fontWeight={'light'}
                             justifyContent={'space-around'}
                             p={['6px', '10px']}
                             w={['7rem', '9rem']}
                             size={['sm', 'md']}
                             fontSize={['.8rem', '1rem']}
                             variant={'solid'}
+
                             rightIcon={<IoArrowForwardCircleOutline
                                 size={20}
                                 color={'dark.700'}/>}
                     >
                         Place Bid
-                    </Button>
+                    </WhiteButton>
                 </Link>
             </Box>
         </Box>
