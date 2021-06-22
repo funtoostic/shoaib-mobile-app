@@ -26,9 +26,9 @@ const Activity = ({billUploadHistory, bids}) => {
                 return [...prevBillls, ...billUploadHistory]
             })
 
-            if (billUploadHistory.length === 0 || !billUploadHistory) {
+            if ((billUploadHistory.length === 0) || !billUploadHistory) {
+                console.log('inside check')
                 setHasMore(false)
-                return;
             }
 
             setPage(page + 1);
