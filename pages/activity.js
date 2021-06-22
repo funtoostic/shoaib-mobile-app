@@ -1,16 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Box, Container, HStack, Spacer, Text, VStack} from "@chakra-ui/react";
 import ActivityCard from "../src/components/Activity/ActivityCard";
 import {client} from "../src/utils/utils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const Activity = ({billUploadHistory,bids}) => {
+const Activity = ({billUploadHistory, bids}) => {
 
     const billUpload = billUploadHistory[0];
 
-    const merchantName = billUpload.merchant || 'Unknown';
+    const [uploadedBills, setUploadeddBills] = useState(billUploadHistory);
+
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
+    const fetchData = async () => {
+
+        try {
+            const resBillUploadHistory = await client.get(`/v1/receipt?page=${page}`);
+
+            const billUploadHistory = await resBillUploadHistory.data.transactions;
+
+            console.log('bill upload history', billUploadHistory)
+
+            setUploadeddBills((prevBillls) => {
+                return [...prevBillls, ...billUploadHistory]
+            })
+
+            if ((billUploadHistory.length === 0) || !billUploadHistory) {
+                console.log('inside check')
+                setHasMore(false)
+            }
+
+            setPage(page + 1);
+
+        } catch (err) {
+            console.log(err);
+        }
+
+
+    }
+
+    console.log(uploadedBills)
 
     return (
-        <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
+        <Box bg={'dark.500'} minH={'100vh'} pb={'8rem'}>
 
             <Container
                 pt={6}
@@ -33,18 +66,22 @@ const Activity = ({billUploadHistory,bids}) => {
                 </HStack>
 
                 <VStack w={'100%'} mt={8}>
-                {
-                    bids.map(bid => (
-                        <ActivityCard
-                            bidValue={`+ ${bid.bidValue}`}
-                            // price={`+ ${bid.bidValue}`}
-                            imgSrc={bid.image}
-                            bidTitle={bid.title}
-                            // createdAt={billUpload.createdAt}
-                            // status={0}
-                        />
-                    ))
-                }
+
+                    {
+                        bids.map(bid => {
+
+                            return (
+                                <ActivityCard
+                                    bidValue={`+ ${bid.bidValue}`}
+                                    // price={`+ ${bid.bidValue}`}
+                                    imgSrc={bid.image}
+                                    bidTitle={bid.title}
+                                    // createdAt={billUpload.createdAt}
+                                    // status={0}
+                                />
+                            )
+                        })
+                    }
 
 
                 </VStack>
@@ -53,17 +90,59 @@ const Activity = ({billUploadHistory,bids}) => {
                     Bill History
                 </Text>
 
-                <VStack w={'100%'} mt={8} mb={8}>
-                    <ActivityCard
-                        price={`+ ${billUpload.points}`}
-                        imgSrc={billUpload.thumbnailUrl}
-                        merchant={merchantName}
-                        createdAt={billUpload.createdAt}
-                        status={0}
-                    />
+
+                <InfiniteScroll
+                    dataLength={uploadedBills.length} //This is important field to render the next data
+                    next={fetchData}
+                    hasMore={hasMore}
+                    loader={
+                        <Box color={'white'} textAlign={'center'}>
+                            Loading...
+                        </Box>
+                    }
+                    endMessage={
+                        <Text fontWeight={'300'} color={'#fff'} textAlign={'center'}>
+                            <b>Yay! You have seen all bills</b>
+                        </Text>
+                    }
+                    // below props only if you need pull down functionality
+                    // refreshFunction={this.refresh}
+                    // pullDownToRefresh
+                    // pullDownToRefreshThreshold={50}
+                    // pullDownToRefreshContent={
+                    //     <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+                    // }
+                    // releaseToRefreshContent={
+                    //     <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+                    // }
+                >
+                    <VStack w={'100%'} mt={8} mb={8}>
+
+                        {
+                            uploadedBills.map((bill) => {
+
+                                const merchantName = bill.merchant || 'Unknown';
+
+                                return (
+                                    <ActivityCard
+                                        price={`+ ${bill.points}`}
+                                        // todo set the correct imagge url after fixing the pdf-
+                                        // the corrrect image url is given below
+                                        // imgSrc={bill.thumbnailUrl}
+
+                                        // this is dummy image url
+                                        imgSrc={billUpload.thumbnailUrl}
+                                        merchant={merchantName}
+                                        createdAt={bill.createdAt}
+                                        status={bill.status}
+                                    />
+                                )
+                            })
+                        }
 
 
-                </VStack>
+                    </VStack>
+                </InfiniteScroll>
 
             </Container>
         </Box>
