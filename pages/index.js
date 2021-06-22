@@ -3,13 +3,14 @@ import {DarkModeSwitch} from "../src/components/Buttons/DarkModeSwitch";
 import {useDispatch, useSelector} from "react-redux";
 import {decrement, increment, selectCounterVale} from "../src/store/counter/counterSlice";
 import PointsSection from "../src/components/home/PointsSection";
-import StepperSection from "../src/components/home/StepperSection";
+// import StepperSection from "../src/components/home/StepperSection/StepperSection";
+import StepperSection from "../src/components/home/Stepper";
 import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
-import ImageWithCTABtn from "../src/components/home/ImageWithCTABtn";
 import BottomCarousel from "../src/components/home/BottomCarousel/BottomCarousel";
 import HeroCarousel from "../src/components/home/HeroCarousel/HeroCarousel";
+import {client} from "../src/utils/utils";
 
-const Home = () => {
+const Home = ({pointsData,checkinData,rewardsData}) => {
 
     // const dispatch = useDispatch();
     //
@@ -24,40 +25,96 @@ const Home = () => {
     //     dispatch(decrement());
     // }
 
+    const heroRewards = rewardsData.layout.filter(reward => reward.type === 'HERO');
+    const sleepingBannerRewards = rewardsData.layout.filter(reward => reward.type === 'SLEEPING_BANNER')
+
+    const endingTime = rewardsData.validTill;
+
+
     return (
         <Box bg={'dark.500'} minH={'100vh'} pb={'5rem'}>
 
             <Container maxW={'container.md'}>
                 {/* Points section*/}
                 <Box pt={'2rem'} pb={'3rem'}>
-                    <PointsSection/>
+                    <PointsSection pointsData={pointsData}/>
                 </Box>
 
                 {/*Stepper Section*/}
                 <Box>
-                    <StepperSection/>
+                    <StepperSection checkinData={checkinData}/>
                 </Box>
 
                 {/* Bid time section*/}
                 <Box pt={'2rem'}>
-                    <BidTimeSection/>
+                    <BidTimeSection endingTime={endingTime}/>
                 </Box>
 
                 {/*Hero carousel*/}
-                <Box>
-                    <HeroCarousel/>
-                </Box>
+                {
+                    heroRewards.map((reward,i) => (
+                        <Box key={i}>
+                            <HeroCarousel index={i} reward={reward}/>
+                        </Box>
+                    ))
+                }
+
 
                 {/*Bottom Carousel*/}
-                <Box>
-                    <BottomCarousel/>
-                </Box>
+                {
+                    sleepingBannerRewards.map((reward,i)=> (
+                        <Box key={i} >
+                            <BottomCarousel index={i} reward={reward}/>
+                        </Box>
+                    ))
+                }
+
 
             </Container>
         </Box>
     )
 }
 
-export {getServerSideProps} from "../src/theme/Chakra";
+export async function getServerSideProps({req}) {
+    // here we are using fetch api
+
+    // const res = await fetch('https://api.dev.billup.app/v1/point',{
+    //     headers: {
+    //         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJVRUNPMTlDOG1ZVWVISTFiQlJrdXRIcElyOTMiLCJwaG9uZSI6Iis5MTk3NDA2MDY3MjgiLCJpYXQiOjE2MjQwNTkxNDAsImV4cCI6MTYyOTI0MzE0MH0.gxpnZLdR8gZR7AocvTvVUmUzVVP-5TjFqzqdE2uM3oA`
+    //     },
+    // })
+
+    //here we are using axios
+    const resPoints = await client.get('/v1/point')
+
+    const resRewards = await client.get('/v1/rewards')
+
+    const resCheckin = await client.get('v1/rewards/checkins');
+
+
+    const pointsData = await resPoints.data;
+
+    const checkinData = await resCheckin.data.data;
+
+    const rewardsData = await resRewards.data.campaign;
+
+    if (!pointsData || !checkinData || !rewardsData) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            pointsData,
+            checkinData,
+            rewardsData,
+            cookies: req.headers.cookie ?? "",
+        }, // will be passed to the page component as props
+    }
+}
 
 export default Home;

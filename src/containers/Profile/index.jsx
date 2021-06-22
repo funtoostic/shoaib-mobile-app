@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Flex, VStack } from "@chakra-ui/react";
+import { Box, Container, VStack } from "@chakra-ui/react";
 import ProfileHeader from "../../components/ProfileHeader";
 import ProfileContent from "../../components/ProfileContent";
 
@@ -21,7 +21,7 @@ export default function Profile() {
             <ProfileHeader />
           </Box>
         </Container>
-        <Box borderRadius={20} p={5} bg="white" jus flex="1">
+        <Box borderRadius={20} p={5} bg="white" flex="1">
           <ProfileContent />
         </Box>
       </VStack>

@@ -3,30 +3,20 @@ import {Box} from "@chakra-ui/react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import CarouselImageWithCTABtn from "./CarouselImageWithCTABtn";
 
-
-const BottomCarousel = () => {
+const BottomCarousel = ({reward,index}) => {
     return (
         <Box>
-            <Swiper style={{marginTop: '-2rem'}} slidesPerView={'auto'} spaceBetween={1} className="mySwiper">
+            <Swiper style={{ marginTop: (index === 0) ? "-2rem" : '-3rem'}} slidesPerView={'auto'} spaceBetween={10} className="mySwiper">
 
-                <SwiperSlide style={{width: '85%'}}>
-                    <CarouselImageWithCTABtn
-                        imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}/>
-                </SwiperSlide>
-
-
-                <SwiperSlide style={{width: '85%'}}>
-                    <CarouselImageWithCTABtn
-                        imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}/>
-
-                </SwiperSlide>
-
-                <SwiperSlide style={{width: '85%'}}>
-                    <CarouselImageWithCTABtn
-                        imageSrc={'https://billupassets.blob.core.windows.net/rewards/sample/carousel-1.png'}
-
-                    />
-                </SwiperSlide>
+                {
+                    reward.slides.map((slide) => (
+                        <SwiperSlide key={slide.id} style={{width: '85%'}}>
+                            <CarouselImageWithCTABtn
+                                id={slide.id}
+                                imageSrc={slide.banner}/>
+                        </SwiperSlide>
+                    ))
+                }
 
             </Swiper>
         </Box>

@@ -1,38 +1,45 @@
 @font-face {
-    font-family: "EBGaramond";
-    src: url("/fonts/Volte.otf");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
+  font-family: "Volte";
+  src: url("/fonts/Volte.otf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 @font-face {
-    font-family: "EBGaramond";
-    src: url("/fonts/Volte-bold.otf");
-    font-style: auto;
-    font-weight: 500;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "EBGaramond";
-    src: url("/fonts/Volte-Semibold.otf");
-    font-style: auto;
-    font-weight: 500;
-    font-display: swap;
+  font-family: "Voltev";
+  src: url("/fonts/Volte-Bold.otf");
+  font-style: auto;
+  font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "EBGaramond";
-    src: url("/fonts/Volte-Medium.otf");
-    font-style: auto;
-    font-weight: 500;
-    font-display: swap;
+  font-family: "Volte";
+  src: url("/fonts/Volte-Semibold.otf");
+  font-style: auto;
+  font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "EBGaramond";
-    src: url("/fonts/Volte-Light.otf");
-    font-style: auto;
-    font-weight: 500;
-    font-display: swap;
+  font-family: "Volte";
+  src: url("/fonts/Volte-Medium.otf");
+  font-style: auto;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Volte";
+  src: url("/fonts/Volte-Light.otf");
+  font-style: auto;
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* slider styles */
+.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 30px;
 }

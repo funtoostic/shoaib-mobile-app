@@ -1,22 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
-  Button,
   Container,
   Heading,
   HStack,
   Spacer,
   Text,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
-import BidTimeSection from "../src/components/home/BidTiimeSection/BidTimeSection";
+import BidTimeSection from "../../src/components/home/BidTiimeSection/BidTimeSection";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
+import { client } from "../../src/utils/utils";
+import parse from "html-react-parser";
+import WhiteButton from "../../src/components/Buttons/WhiteButton";
 
-const RewardDescription = () => {
+const ProductDetails = ({ productData, pointsData, id }) => {
   const [isLargerThan480] = useMediaQuery("(min-width: 480px)");
+
+  const toast = useToast();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const placeBidHandler = () => {
+    // if the user has less balance then it will return
+    if (pointsData.balance < productData.minimumBid) {
+      toast({
+        title: "Error",
+        description: "Insufficient Funds",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    // if the user has balance then the logic goes here
+    setIsLoading(true);
+
+    client
+      .post(`/v1/reward/${id}/bid`, {
+        bidValue: productData.minimumBid,
+      })
+      .then(() => {
+        setIsLoading(false);
+
+        toast({
+          title: "Success",
+          description: "Bid Successful",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+
+        toast({
+          title: "Error",
+          description: err.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
+  };
+
+  console.log(productData);
 
   return (
     <Box minH={"100vh"} pb={"5rem"}>
@@ -32,9 +86,7 @@ const RewardDescription = () => {
             pos={"relative"}
           >
             <Image
-              src={
-                "https://billupassets.blob.core.windows.net/rewards/sample/details-banner.png"
-              }
+              src={productData.details.productBanner}
               priority={"true"}
               placeholder={"blur"}
               width={"568"}
@@ -74,46 +126,39 @@ const RewardDescription = () => {
               borderRadius={"15px 15px 0 0"}
               pb={["13rem", "14rem", "15rem"]}
             >
-              <HStack>
-                {/*left box*/}
-                <Box>
-                  <Heading fontSize={"20px"} as={"h3"}>
-                    Redmi 9 Power
-                  </Heading>
-                  <Text fontSize={"1rem"}>Power Packedv</Text>
-                </Box>
+              {/*<HStack>*/}
+              {/*left box*/}
+              <Box>
+                <Text fontSize={"20px"} as={"h3"}>
+                  {productData.details.title}
+                </Text>
+                <Text fontSize={"1rem"}>{productData.details.subTitle}</Text>
+              </Box>
 
-                <Spacer />
+              {/*<Spacer/>*/}
 
-                {/*right box*/}
-                <Box>
-                  <Heading fontSize={"20px"} as={"h3"}>
-                    ₹ 9,999
-                  </Heading>
-                  <Text fontSize={"1rem"}>48MP | 6000mAh</Text>
-                </Box>
-              </HStack>
+              {/*/!*right box*!/*/}
+              {/*<Box>*/}
+              {/*    <Heading fontSize={'20px'} as={'h3'}>*/}
+              {/*        ₹ 9,999*/}
+              {/*    </Heading>*/}
+              {/*    <Text fontSize={'1rem'}>*/}
+              {/*        48MP | 6000mAh*/}
+              {/*    </Text>*/}
+              {/*</Box>*/}
+
+              {/*</HStack>*/}
 
               {/*    Desc Text*/}
-              <Text my={4}>
-                48MP Quad Camera Array, 6000mAh Enhanced Lifespan Battery
-                16.58cm(6.53) FHD+ IPS Display,Qualcomm® Snapdragon™ 662 Up to
-                128GB UFS 2.2 Storage,18W Fast Charge (22.5W In-box) Corning®
-                Gorilla® Glass 3, Stereo Speakers
-              </Text>
+              <Box my={4} px={3}>
+                {parse(productData.details.description)}
+              </Box>
 
-              <Heading fontSize={"20px"} as={"h3"}>
+              <Text fontSize={"20px"} as={"h3"}>
                 Rules to participate
-              </Heading>
-
-              <Text mt={4}>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis exerci
-                tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-                commodo consequat. Duis autem vel eum iriure dolor in hendr in
-                vulputate velit esse molestie consequat, vel illum dolore eu
               </Text>
+
+              <Box mt={4}>{parse(productData.details.rules)}</Box>
             </Box>
           </Box>
         </Box>
@@ -152,20 +197,22 @@ const RewardDescription = () => {
                   fontWeight={"bold"}
                   fontSize={["12px"]}
                 >
-                  50,257
+                  {pointsData.balance}
                 </Text>
               </Box>
             </Box>
 
             <Spacer />
             <Box>
-              <Button
+              <WhiteButton
+                isLoading={isLoading}
+                onClick={placeBidHandler}
                 fontSize={"12px"}
                 size={"sm"}
                 rightIcon={<IoArrowForwardCircleOutline />}
               >
                 Place Bid
-              </Button>
+              </WhiteButton>
             </Box>
           </HStack>
         </Box>
@@ -174,4 +221,30 @@ const RewardDescription = () => {
   );
 };
 
-export default RewardDescription;
+export async function getServerSideProps({ query: { id } }) {
+  //here we are using axios
+  const resProduct = await client.get(`/v1/reward/${id}`);
+  const resPoints = await client.get("/v1/point");
+
+  const pointsData = await resPoints.data;
+  const productData = await resProduct.data;
+
+  if (!productData) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      productData,
+      pointsData,
+      id,
+    },
+  };
+}
+
+export default ProductDetails;

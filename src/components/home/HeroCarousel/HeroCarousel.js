@@ -1,31 +1,35 @@
-import React from 'react';
-import {Box} from "@chakra-ui/react";
-import {Swiper, SwiperSlide} from "swiper/react";
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import ImageWithCTABtn from "../ImageWithCTABtn";
+import SwiperCore, { Pagination } from "swiper/core";
 
-const HeroCarousel = () => {
-    return (
-        <Swiper slidesPerView={'auto'} spaceBetween={5} className="mySwiper">
+SwiperCore.use([Pagination]);
 
-            <SwiperSlide >
-                <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
+const HeroCarousel = ({ reward, index }) => {
+  console.log(reward);
 
-            </SwiperSlide>
-
-
-            <SwiperSlide >
-
-                <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
-
-            </SwiperSlide>
-
-            <SwiperSlide >
-                <ImageWithCTABtn imageSrc={`https://billupassets.blob.core.windows.net/rewards/sample/hero.png`}/>
-
-            </SwiperSlide>
-
-        </Swiper>
-    );
+  return (
+    <Box pb={2}>
+      <Swiper
+        style={{ marginTop: index === 0 ? "0" : "-2rem" }}
+        slidesPerView={"auto"}
+        spaceBetween={5}
+        className="mySwiper"
+        pagination
+      >
+        {reward.slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <ImageWithCTABtn
+              id={slide.id}
+              imageSrc={slide.banner}
+              title={reward.title}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  );
 };
 
 export default HeroCarousel;
