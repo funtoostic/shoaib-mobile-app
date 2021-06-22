@@ -147,7 +147,7 @@ const StepperSection = ({ checkinData = [] }) => {
                 key={index}
                 styleConfig={styleConfig}
                 label={step.label}
-                onClick={isActive ? onActiveStepClick : undefined}
+                onClick={isActive ? onActiveStepClick : null}
                 style={style}
               >
                 {step.title}
