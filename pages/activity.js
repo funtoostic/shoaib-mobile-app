@@ -10,25 +10,33 @@ const Activity = ({billUploadHistory, bids}) => {
 
     const [uploadedBills, setUploadeddBills] = useState(billUploadHistory);
 
-    const [page,setPage] = useState(1);
-    const  [hasMore,setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     const fetchData = async () => {
 
-        const resBillUploadHistory = await client.get(`/v1/receipt?page=${page}`);
+        try {
+            const resBillUploadHistory = await client.get(`/v1/receipt?page=${page}`);
 
-        const billUploadHistory = await resBillUploadHistory.data.transactions;
+            const billUploadHistory = await resBillUploadHistory.data.transactions;
 
-        setUploadeddBills((prevBillls) => {
-            return  [...prevBillls,...billUploadHistory]
-        })
+            console.log('bill upload history', billUploadHistory)
 
-        if (billUploadHistory.length ===  0 || !billUploadHistory) {
-            setHasMore(false)
-            return;
+            setUploadeddBills((prevBillls) => {
+                return [...prevBillls, ...billUploadHistory]
+            })
+
+            if (billUploadHistory.length === 0 || !billUploadHistory) {
+                setHasMore(false)
+                return;
+            }
+
+            setPage(page + 1);
+
+        } catch (err) {
+            console.log(err);
         }
 
-        setPage(page + 1);
 
     }
 
@@ -83,7 +91,6 @@ const Activity = ({billUploadHistory, bids}) => {
                 </Text>
 
 
-
                 <InfiniteScroll
                     dataLength={uploadedBills.length} //This is important field to render the next data
                     next={fetchData}
@@ -116,7 +123,7 @@ const Activity = ({billUploadHistory, bids}) => {
 
                                 const merchantName = bill.merchant || 'Unknown';
 
-                                return(
+                                return (
                                     <ActivityCard
                                         price={`+ ${bill.points}`}
                                         // todo set the correct imagge url after fixing the pdf-
