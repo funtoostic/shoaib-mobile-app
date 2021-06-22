@@ -23,7 +23,7 @@ const Activity = ({billUploadHistory, bids}) => {
             return  [...prevBillls,...billUploadHistory]
         })
 
-        if (billUploadHistory.length ===  0) {
+        if (billUploadHistory.length ===  0 || !billUploadHistory) {
             setHasMore(false)
             return;
         }
