@@ -20,7 +20,7 @@ class MyDocument extends Document {
 
                     <link
                         rel="preload"
-                        href="/fonts/Volte-bold.otf"
+                        href="/fonts/Volte-Bold.otf"
                         as="font"
                         crossOrigin=""
                     />

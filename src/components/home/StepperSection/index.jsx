@@ -5,6 +5,51 @@ import Lottie from "react-lottie-player";
 
 import lottieJson from "./data/8804-level-up-confetti-animation.json";
 
+const stepsData = [
+  {
+    id: "1",
+    label: "+1",
+    title: "1",
+    completed: true,
+  },
+  {
+    id: "2",
+    label: "+2",
+    title: "2",
+    completed: true,
+  },
+  {
+    id: "3",
+    label: "+3",
+    title: "3",
+    completed: true,
+  },
+  {
+    id: "4",
+    label: "+4",
+    title: "4",
+    completed: false,
+    active: true,
+  },
+  {
+    id: "5",
+    label: "+5",
+    title: "5",
+    completed: false,
+  },
+  {
+    id: "6",
+    label: "+6",
+    title: "6",
+    completed: false,
+  },
+  {
+    id: "7",
+    label: "+7",
+    title: "7",
+    completed: false,
+  },
+];
 const StepperSection = ({ checkinData = [] }) => {
   const [isLargerThan400] = useMediaQuery("(min-width: 400px)");
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
@@ -102,7 +147,7 @@ const StepperSection = ({ checkinData = [] }) => {
                 key={index}
                 styleConfig={styleConfig}
                 label={step.label}
-                onClick={isActive ? onActiveStepClick : null}
+                onClick={isActive ? onActiveStepClick : undefined}
                 style={style}
               >
                 {step.title}

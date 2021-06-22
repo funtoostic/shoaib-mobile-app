@@ -3,8 +3,12 @@ import Countdown from "react-countdown";
 import { HStack, Spacer, Text } from "@chakra-ui/react";
 import TimeRenderer from "./TimeRenderer";
 
-const BidTimeSection = () => {
+const BidTimeSection = ({ endingTime }) => {
   const date = new Date();
+
+  const lastTime = new Date(endingTime);
+
+  const remainingTime = lastTime.getTime() - date.getTime();
 
   return (
     <HStack
@@ -18,7 +22,7 @@ const BidTimeSection = () => {
         intervalDelay={0}
         precision={3}
         renderer={TimeRenderer}
-        date={date.getTime() + 9810000}
+        date={remainingTime}
       />
       ,
     </HStack>

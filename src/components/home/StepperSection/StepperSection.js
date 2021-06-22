@@ -1,6 +1,8 @@
 import React from 'react';
 import {Box, Text, useMediaQuery} from "@chakra-ui/react";
 import {Step, Stepper} from 'react-form-stepper';
+import {client} from "../../../utils/utils";
+import { useToast } from "@chakra-ui/react"
 
 const StepperSection = ({checkinData}) => {
 
@@ -10,7 +12,38 @@ const StepperSection = ({checkinData}) => {
 
     const days =  checkinData.map(checkinData => checkinData.day).sort((a, b) => a - b);
 
-    console.log(days);
+    const toast = useToast();
+
+    const stepClickHandler = (day) => {
+
+        // if user has not clicked on active link it will return
+        if (day !== days[days.length -1]) return;
+
+        // v1/rewards/checkins
+        client.post('/v1/rewards/checkins')
+            .then(() => {
+
+                toast({
+                    title: "Success",
+                    description: "Checkin Successful",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                })
+
+            })
+            .catch(err => {
+
+                toast({
+                    title: "Error",
+                    description: err.message,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+
+            })
+    }
 
     return (
         <Box py={8} borderRadius={'20px'} border={'1px solid #333333'}>
@@ -33,6 +66,7 @@ const StepperSection = ({checkinData}) => {
             >
 
                 <Step
+                    onClick={stepClickHandler.bind(this,0)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -55,6 +89,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,1)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -77,6 +112,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,2)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -99,6 +135,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,3)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -121,6 +158,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,4)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -143,6 +181,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,5)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',
@@ -165,6 +204,7 @@ const StepperSection = ({checkinData}) => {
                 </Step>
 
                 <Step
+                    onClick={stepClickHandler.bind(this,6)}
                     styleConfig={{
                         activeBgColor: 'transparent',
                         inactiveBgColor: 'transparent',

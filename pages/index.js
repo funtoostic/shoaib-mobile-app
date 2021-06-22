@@ -25,8 +25,10 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
     //     dispatch(decrement());
     // }
 
-    const heroRewards = rewardsData.filter(reward => reward.type === 'HERO');
-    const sleepingBannerRewards = rewardsData.filter(reward => reward.type === 'SLEEPING_BANNER')
+    const heroRewards = rewardsData.layout.filter(reward => reward.type === 'HERO');
+    const sleepingBannerRewards = rewardsData.layout.filter(reward => reward.type === 'SLEEPING_BANNER')
+
+    const endingTime = rewardsData.validTill;
 
 
     return (
@@ -45,7 +47,7 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
 
                 {/* Bid time section*/}
                 <Box pt={'2rem'}>
-                    <BidTimeSection/>
+                    <BidTimeSection endingTime={endingTime}/>
                 </Box>
 
                 {/*Hero carousel*/}
@@ -73,7 +75,7 @@ const Home = ({pointsData,checkinData,rewardsData}) => {
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}) {
     // here we are using fetch api
 
     // const res = await fetch('https://api.dev.billup.app/v1/point',{
@@ -94,7 +96,7 @@ export async function getServerSideProps() {
 
     const checkinData = await resCheckin.data.data;
 
-    const rewardsData = await resRewards.data.campaign.layout;
+    const rewardsData = await resRewards.data.campaign;
 
     if (!pointsData || !checkinData || !rewardsData) {
         return {
@@ -109,7 +111,8 @@ export async function getServerSideProps() {
         props: {
             pointsData,
             checkinData,
-            rewardsData
+            rewardsData,
+            cookies: req.headers.cookie ?? "",
         }, // will be passed to the page component as props
     }
 }

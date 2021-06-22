@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
-  Button,
   Container,
   Heading,
   HStack,
   Spacer,
   Text,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import BidTimeSection from "../../src/components/home/BidTiimeSection/BidTimeSection";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
@@ -16,9 +16,59 @@ import Image from "next/image";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { client } from "../../src/utils/utils";
 import parse from "html-react-parser";
+import WhiteButton from "../../src/components/Buttons/WhiteButton";
 
-const ProductDetails = ({ productData, pointsData }) => {
+const ProductDetails = ({ productData, pointsData, id }) => {
   const [isLargerThan480] = useMediaQuery("(min-width: 480px)");
+
+  const toast = useToast();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const placeBidHandler = () => {
+    // if the user has less balance then it will return
+    if (pointsData.balance < productData.minimumBid) {
+      toast({
+        title: "Error",
+        description: "Insufficient Funds",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    // if the user has balance then the logic goes here
+    setIsLoading(true);
+
+    client
+      .post(`/v1/reward/${id}/bid`, {
+        bidValue: productData.minimumBid,
+      })
+      .then(() => {
+        setIsLoading(false);
+
+        toast({
+          title: "Success",
+          description: "Bid Successful",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+
+        toast({
+          title: "Error",
+          description: err.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
+  };
 
   console.log(productData);
 
@@ -79,7 +129,7 @@ const ProductDetails = ({ productData, pointsData }) => {
               {/*<HStack>*/}
               {/*left box*/}
               <Box>
-                <Text fontSize={"20px"} fontWeight={600} size={"md"} as={"h3"}>
+                <Text fontSize={"20px"} as={"h3"}>
                   {productData.details.title}
                 </Text>
                 <Text fontSize={"1rem"}>{productData.details.subTitle}</Text>
@@ -100,11 +150,13 @@ const ProductDetails = ({ productData, pointsData }) => {
               {/*</HStack>*/}
 
               {/*    Desc Text*/}
-              <Box my={4}>{parse(productData.details.description)}</Box>
+              <Box my={4} px={3}>
+                {parse(productData.details.description)}
+              </Box>
 
-              <Heading fontSize={"20px"} as={"h3"}>
+              <Text fontSize={"20px"} as={"h3"}>
                 Rules to participate
-              </Heading>
+              </Text>
 
               <Box mt={4}>{parse(productData.details.rules)}</Box>
             </Box>
@@ -152,13 +204,15 @@ const ProductDetails = ({ productData, pointsData }) => {
 
             <Spacer />
             <Box>
-              <Button
+              <WhiteButton
+                isLoading={isLoading}
+                onClick={placeBidHandler}
                 fontSize={"12px"}
                 size={"sm"}
                 rightIcon={<IoArrowForwardCircleOutline />}
               >
                 Place Bid
-              </Button>
+              </WhiteButton>
             </Box>
           </HStack>
         </Box>
@@ -188,6 +242,7 @@ export async function getServerSideProps({ query: { id } }) {
     props: {
       productData,
       pointsData,
+      id,
     },
   };
 }

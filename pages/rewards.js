@@ -7,12 +7,14 @@ import { client } from "../src/utils/utils";
 import RewardTopCarousel from "../src/components/reward/RewardTopCarousel";
 
 const RewardPage = ({ pointsData, rewardsData }) => {
-  const heroRewards = rewardsData.filter((reward) => reward.type === "HERO");
-  const sleepingBannerRewards = rewardsData.filter(
+  const heroRewards = rewardsData.layout.filter(
+    (reward) => reward.type === "HERO"
+  );
+  const sleepingBannerRewards = rewardsData.layout.filter(
     (reward) => reward.type === "SLEEPING_BANNER"
   );
 
-  console.log(heroRewards);
+  const endingTime = rewardsData.validTill;
 
   return (
     <Box bg={"dark.500"} minH={"100vh"} pb={"5rem"}>
@@ -24,7 +26,7 @@ const RewardPage = ({ pointsData, rewardsData }) => {
 
         {/*/ Bid time section*/}
         <Box>
-          <BidTimeSection />
+          <BidTimeSection endingTime={endingTime} />
         </Box>
 
         {sleepingBannerRewards.map((reward, i) => (
@@ -49,7 +51,7 @@ export async function getServerSideProps() {
 
   const pointsData = await resPoints.data;
 
-  const rewardsData = await resRewards.data.campaign.layout;
+  const rewardsData = await resRewards.data.campaign;
 
   if (!pointsData || !rewardsData) {
     return {
